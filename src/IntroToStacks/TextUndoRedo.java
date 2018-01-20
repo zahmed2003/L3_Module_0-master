@@ -13,7 +13,7 @@ public class TextUndoRedo implements KeyListener{
 JFrame frame = new JFrame();
 	
 	JPanel panel = new JPanel();
-	JLabel label = new JLabel("one towpver");
+	JLabel label = new JLabel();
 	
 	Stack<String> character = new Stack<String>();
 	
