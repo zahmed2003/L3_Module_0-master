@@ -41,7 +41,8 @@ public class LogSearch implements ActionListener{
 	JButton addEntry = new JButton();
 	JButton SearchByID = new JButton();
 	JButton ViewList = new JButton();
-	HashMap<String, Integer> logs = new HashMap<String, Integer>();
+	JButton removeEntry = new JButton();
+	HashMap<Integer, String> logs = new HashMap<Integer, String>();
 	
 	JFrame frame = new JFrame();
 	
@@ -49,6 +50,8 @@ public class LogSearch implements ActionListener{
 	
 	String name;
 	String idS;
+	String idS2;
+	int id2;
 	Integer id;
 	String searchS;
 	Integer search;
@@ -76,10 +79,15 @@ public class LogSearch implements ActionListener{
 	ViewList.addActionListener(this);
 	ViewList.setVisible(true);
 	
+	removeEntry.setText("Remove Entry");
+	removeEntry.addActionListener(this);
+	removeEntry.setVisible(true);
+	
 	frame.add(panel);
 	panel.add(addEntry);
 	panel.add(SearchByID);
 	panel.add(ViewList);
+	panel.add(removeEntry);
 	
 	frame.pack();
 	
@@ -97,20 +105,39 @@ public class LogSearch implements ActionListener{
 			
 			name = JOptionPane.showInputDialog("Input a name");
 			
-			logs.put(name, id);
+			logs.put(id, name);
 		}
 		if(e.getSource().equals(SearchByID))
 		{
 		searchS = JOptionPane.showInputDialog("Input your ID");
 		search = Integer.parseInt(searchS);
-		for(Integer i: logs.values())
+		if(logs.containsKey(search))
 		{
-			if(i == search)
-			{
-				JOptionPane.showMessageDialog(null, logs);
-			}
+			JOptionPane.showMessageDialog(null, logs.get(search));
 		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "This entry does not exist");
+		}
+		}
+		if(e.getSource().equals(ViewList))
+		{
+			printList();
+		}
+		if(e.getSource().equals(removeEntry))
+		{
+			idS2 = JOptionPane.showInputDialog("Input an ID Number");
+			id2 = Integer.parseInt(idS2);
+			
+			logs.remove(id2);
 		}
 		
+	}
+	public void printList()
+	{
+		for(Integer i : logs.keySet())
+		{
+			System.out.println("ID: " + i + "  Name: " + logs.get(i));
+		}
 	}
 }
