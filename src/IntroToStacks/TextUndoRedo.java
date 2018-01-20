@@ -13,9 +13,16 @@ public class TextUndoRedo implements KeyListener{
 JFrame frame = new JFrame();
 	
 	JPanel panel = new JPanel();
-	JLabel label = new JLabel();
 	
-	Stack<String> character = new Stack<String>();
+	char keyPressed;
+	char key;
+	
+	String keyString = "";
+	String keyStringO = "";
+	
+	JLabel label = new JLabel(keyString);
+	
+	Stack<Character> character = new Stack<Character>();
 	
 	public static void main(String[] args) {
 		TextUndoRedo t = new TextUndoRedo();
@@ -34,7 +41,7 @@ JFrame frame = new JFrame();
 	frame.add(panel);
 	panel.add(label);
 	
-	
+	frame.addKeyListener(this);
 	
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
@@ -43,8 +50,34 @@ JFrame frame = new JFrame();
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		keyPressed = e.getKeyChar();
+		
+		if(keyPressed != KeyEvent.VK_BACK_SPACE && keyPressed != KeyEvent.VK_COMMA)
+		{
+		
+		key = keyPressed;
+		keyStringO = keyString;
+		keyString = keyString + keyPressed;
 		
 		
+		label.setText(keyString);
+		}
+		
+		else if (keyPressed == KeyEvent.VK_BACK_SPACE)
+		{
+			label.setText("");
+			label.setText(keyStringO);
+			keyString = keyStringO;
+			character.push(key);
+			
+		}
+		
+		else if (keyPressed == KeyEvent.VK_COMMA)
+		{
+			key = character.pop();
+			keyString = keyString + key;
+			label.setText(keyString);
+		}
 	}
 
 	@Override
@@ -54,7 +87,7 @@ JFrame frame = new JFrame();
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	/* 
