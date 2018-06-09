@@ -45,7 +45,7 @@ public class TextUndoRedoII implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE && e.getKeyCode() != KeyEvent.VK_COMMA) {label.setText(label.getText() + e.getKeyChar());}
+		if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE && e.getKeyCode() != KeyEvent.VK_CLOSE_BRACKET) {label.setText(label.getText() + e.getKeyChar());}
 		else if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
 		{
 		deleted.push(label.getText().substring(label.getText().length() - 1));
